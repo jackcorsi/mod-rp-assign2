@@ -20,9 +20,10 @@ public class ProportionalFeedbackController extends Thread {
 		this.targetDistance = targetDistance;
 	}
 	
-	public void stop() {
+	public void stopRunning() {
 		running = false;
 	}
+	
 	
 	@Override
 	public void run() {

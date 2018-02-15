@@ -24,7 +24,7 @@ public class Part1_1 {
 		controller.setDaemon(true); //Just in case it goes rogue and doesn't die for some reason
 		controller.start();
 		Button.waitForAnyPress();
-		controller.stop();
+		controller.stopRunning();
 	}
 
 }
