@@ -1,49 +1,45 @@
 package rp.assignments.group.assm2;
 
-import lejos.nxt.UltrasonicSensor;
+import lejos.nxt.addon.OpticalDistanceSensor;
 import lejos.robotics.navigation.DifferentialPilot;
+import lejos.util.Delay;
 import rp.util.Rate;
 
 public class ProportionalFeedbackController extends Thread {
-	
-	private static final int SLEEP_DURATION = 2;
-	private static final float SPEED_MULTIPLIER = 100.0f;
-	
+
 	private DifferentialPilot pilot;
-	private UltrasonicSensor sensor;
+	private OpticalDistanceSensor sensor;
 	private int targetDistance;
 	private boolean running;
-	
-	public ProportionalFeedbackController(DifferentialPilot pilot, UltrasonicSensor sensor, int targetDistance) {
+
+	public ProportionalFeedbackController(DifferentialPilot pilot, OpticalDistanceSensor sensor, int targetDistance) {
 		this.pilot = pilot;
 		this.sensor = sensor;
 		this.targetDistance = targetDistance;
 	}
-	
+
 	public void stopRunning() {
 		running = false;
 	}
-	
-	
+
 	@Override
 	public void run() {
-		running = true;
-		Rate rate = new Rate(SLEEP_DURATION);
-		pilot.setTravelSpeed(10.0);
-		pilot.forward();
 		
-		while (running && !isInterrupted()) {
-			double speed = (sensor.getDistance() - targetDistance) * SPEED_MULTIPLIER;
-			if (speed < 0)
-				speed = 0;
-			else if (speed > pilot.getMaxTravelSpeed())
-				speed = pilot.getMaxTravelSpeed();
-			
-			pilot.setTravelSpeed(speed);
-			
-			System.out.println(pilot.getTravelSpeed());
-			rate.sleep();
+		running = true;
+		pilot.forward();
+		pilot.setTravelSpeed(pilot.getMaxTravelSpeed());
+		while (running) {
+			Delay.msDelay(50);
+			System.out.println(sensor.getDistance());
+			if (sensor.getDistance() - targetDistance < 0) {
+				pilot.setTravelSpeed(0.01);
+			} else {
+				pilot.setTravelSpeed(pilot.getMaxTravelSpeed());
+			}
 		}
+		
+		
 		pilot.stop();
+
 	}
 }
