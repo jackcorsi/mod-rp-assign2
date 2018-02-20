@@ -8,7 +8,7 @@ import rp.config.RobotConfigs;
 import rp.config.WheeledRobotConfiguration;
 import rp.systems.WheeledRobotSystem;
 
-public class Part1_2 {
+public class Part1_Turn {
 	
 	private static final SensorPort RIGHT_SENSOR_PORT = SensorPort.S4;
 	private static final SensorPort LEFT_SENSOR_PORT = SensorPort.S1;

@@ -9,7 +9,7 @@ import rp.config.RobotConfigs;
 import rp.config.WheeledRobotConfiguration;
 import rp.systems.WheeledRobotSystem;
 
-public class Part1_1 {
+public class Part1_Follow {
 	
 	private static final int TARGET_DISTANCE = 300;
 	private static final WheeledRobotConfiguration TAYYAB_CONFIG = RobotConfigs.EXPRESS_BOT;
