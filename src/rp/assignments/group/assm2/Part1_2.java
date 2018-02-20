@@ -13,6 +13,10 @@ public class Part1_2 {
 	private static final SensorPort RIGHT_SENSOR_PORT = SensorPort.S4;
 	private static final SensorPort LEFT_SENSOR_PORT = SensorPort.S1;
 	private static final WheeledRobotConfiguration TAYYAB_CONFIG = RobotConfigs.EXPRESS_BOT;
+	private static final int LEFT_HIGH = 400;
+	private static final int LEFT_LOW = 320;
+	private static final int RIGHT_HIGH = 410;
+	private static final int RIGHT_LOW = 320;
 
 	public static void main(String[] args) {
 		System.out.println("Assignment 2 part 2 of part 1");
@@ -22,31 +26,14 @@ public class Part1_2 {
 		LightSensor rightSensor = new LightSensor(RIGHT_SENSOR_PORT);
 		LightSensor leftSensor = new LightSensor(LEFT_SENSOR_PORT);
 		
-		leftSensor.setFloodlight(false);
-		rightSensor.setFloodlight(false);
-		
-		//Perform calibration
-//		System.out.println("Press to calibrate high left value");
-//		Button.waitForAnyPress();
-//		leftSensor.calibrateHigh();
-//		System.out.println("Press to calibrate low left value");
-//		Button.waitForAnyPress();
-//		leftSensor.calibrateLow();
-//		System.out.println("Press to calibrate high right value");
-//		Button.waitForAnyPress();
-//		rightSensor.calibrateHigh();
-//		System.out.println("Press to calibrate low right value");
-//		Button.waitForAnyPress();
-//		rightSensor.calibrateLow();
+		leftSensor.setFloodlight(true);
+		rightSensor.setFloodlight(true);
 		
 		//Manual calibration values
-		rightSensor.setHigh(250);
-		rightSensor.setLow(230);
-		leftSensor.setHigh(200);
-		leftSensor.setLow(200);
-		
-		System.out.println("Press to start");
-		Button.waitForAnyPress();
+		rightSensor.setHigh(RIGHT_HIGH);
+		rightSensor.setLow(RIGHT_LOW);
+		leftSensor.setHigh(LEFT_HIGH);
+		leftSensor.setLow(LEFT_LOW);
 		
 		LineController controller = new LineController(pilot, rightSensor, leftSensor);
 		controller.setDaemon(true); //Just in case it goes rogue and doesn't die for some reason
