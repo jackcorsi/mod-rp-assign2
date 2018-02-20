@@ -5,19 +5,19 @@ import lejos.nxt.Sound;
 import lejos.robotics.navigation.DifferentialPilot;
 import rp.util.Rate;
 
-public class LineController extends Thread {
+public class CurvedLineController extends Thread {
 
 	private static final int PROCESSING_RATE = 40;
 	private static final double TRAVEL_SPEED = 0.1;
-	private static final int TRIGGER_VALUE = 0; // TRIGGERED
-	private static final double TURN_RATE = 50.0;
+	private static final int TRIGGER_VALUE = 20; // TRIGGERED
+	private static final double TURN_RATE = 200.0;
 
 	private DifferentialPilot pilot;
 	private LightSensor rightSensor;
 	private LightSensor leftSensor;
 	private boolean stopped = false;
 
-	public LineController(DifferentialPilot pilot, LightSensor rightSensor, LightSensor leftSensor) {
+	public CurvedLineController(DifferentialPilot pilot, LightSensor rightSensor, LightSensor leftSensor) {
 		this.pilot = pilot;
 		this.rightSensor = rightSensor;
 		this.leftSensor = leftSensor;
